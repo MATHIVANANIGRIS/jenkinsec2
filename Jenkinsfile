@@ -17,7 +17,7 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credss'
+                    credentialsId: 'aws-credsss'
                 ]]) {
                     sh '''
                         cd terraform
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credss'
+                    credentialsId: 'aws-credsss'
                 ]]) {
                     sh '''
                         cd terraform
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credss'
+                    credentialsId: 'aws-credsss'
                 ]]) {
                     sh '''
                         cd terraform
