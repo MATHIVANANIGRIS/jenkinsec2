@@ -20,7 +20,7 @@ pipeline {
                     credentialsId: 'aws-credsss'
                 ]]) {
                     bat '''
-                        cd terraform
+                        cd infra
                         terraform init
                     '''
                 }
@@ -34,7 +34,7 @@ pipeline {
                     credentialsId: 'aws-credsss'
                 ]]) {
                     bat  '''
-                        cd terraform
+                        cd infra
                         terraform plan
                     '''
                 }
@@ -48,7 +48,7 @@ pipeline {
                     credentialsId: 'aws-credsss'
                 ]]) {
                     bat  '''
-                        cd terraform
+                        cd infra
                         terraform apply -auto-approve
                     '''
                 }
