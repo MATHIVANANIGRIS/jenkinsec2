@@ -6,10 +6,6 @@ pipeline {
     }
 
     stages {
-        terraform init
-        terraform plan
-        terraform apply
-
         stage('Checkout Code') {
             steps {
                 git url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git', branch: 'main'
