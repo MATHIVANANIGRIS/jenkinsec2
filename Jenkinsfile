@@ -2,15 +2,14 @@ pipeline {
     agent any
 
     environment {
-        AWS_DEFAULT_REGION = "eu-north-1"
+        AWS_DEFAULT_REGION = "ap-south-1"
     }
 
     stages {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git'
+                git url: 'https://github.com/your-repo/project.git', branch: 'main'
             }
         }
 
@@ -18,13 +17,12 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                    credentialsId: 'aws-credsss'
                 ]]) {
-                    dir('infra') {
-                        bat 'terraform init'
-                    }
+                    sh '''
+                        cd terraform
+                        terraform init
+                    '''
                 }
             }
         }
@@ -33,13 +31,12 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                    credentialsId: 'aws-credsss'
                 ]]) {
-                    dir('infra') {
-                        bat 'terraform plan'
-                    }
+                    sh '''
+                        cd terraform
+                        terraform plan
+                    '''
                 }
             }
         }
@@ -48,13 +45,12 @@ pipeline {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                    credentialsId: 'aws-credsss'
                 ]]) {
-                    dir('infra') {
-                        bat 'terraform apply -auto-approve'
-                    }
+                    sh '''
+                        cd terraform
+                        terraform apply -auto-approve
+                    '''
                 }
             }
         }
