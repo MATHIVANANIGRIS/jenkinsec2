@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Init') {
+        stage('terraform Init') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Plan') {
+        stage('terraform Plan') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
@@ -44,7 +44,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Apply') {
+        stage('terraform Apply') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
