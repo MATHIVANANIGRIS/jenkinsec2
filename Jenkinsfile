@@ -6,50 +6,55 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git', branch: 'main'
+                git branch: 'main',
+                    url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git'
             }
         }
 
-        stage('terraform init') {
+        stage('Terraform Init') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss'
+                    credentialsId: 'aws-credsss',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 ]]) {
-                    bat '''
-                        cd infra
-                        terraform init
-                    '''
+                    dir('infra') {
+                        bat 'terraform init'
+                    }
                 }
             }
         }
 
-        stage('terraform plan') {
+        stage('Terraform Plan') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss'
+                    credentialsId: 'aws-credsss',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 ]]) {
-                    bat  '''
-                        cd infra
-                        terraform plan
-                    '''
+                    dir('infra') {
+                        bat 'terraform plan'
+                    }
                 }
             }
         }
 
-        stage('terraform apply') {
+        stage('Terraform Apply') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss'
+                    credentialsId: 'aws-credsss',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 ]]) {
-                    bat  '''
-                        cd infra
-                        terraform apply -auto-approve
-                    '''
+                    dir('infra') {
+                        bat 'terraform apply -auto-approve'
+                    }
                 }
             }
         }
