@@ -6,9 +6,9 @@ pipeline {
     }
 
     stages {
-        terraform init
-        terraform plan
-        terraform apply
+        Terraform Init
+        Terraform Plan
+        Terraform Apply
 
         stage('Checkout Code') {
             steps {
@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('terraform Init') {
+        stage('Terraform Init') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-        stage('terraform Plan') {
+        stage('Terraform Plan') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
@@ -44,7 +44,7 @@ pipeline {
             }
         }
 
-        stage('terraform Apply') {
+        stage('Terraform Apply') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
