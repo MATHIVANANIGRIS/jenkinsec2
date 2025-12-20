@@ -29,7 +29,7 @@ resource "aws_instance" "web" {
   key_name               = "mykey"
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
-  user_data = file("userdata.sh")
+  user_data = file("user_data.sh")
 
   tags = {
     Name = "Jenkins-Web-Server"
