@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        AWS_DEFAULT_REGION = "ap-south-1"
+        AWS_DEFAULT_REGION = "us-east-2"
     }
 
     stages {
 
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/your-repo/project.git', branch: 'main'
+                git url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git', branch: 'main'
             }
         }
 
