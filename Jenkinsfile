@@ -12,6 +12,7 @@ pipeline {
                 echo "Checking out code from GitHub..."
                 git branch: 'main',
                     url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git'
+                }
             }
         }
 
