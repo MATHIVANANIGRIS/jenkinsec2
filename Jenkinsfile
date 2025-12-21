@@ -19,7 +19,7 @@
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss'
+                    credentialsId: 'aws-credesss'
                 ]]) {
 
                     script {
