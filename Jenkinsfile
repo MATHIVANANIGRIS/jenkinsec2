@@ -9,50 +9,42 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git', branch: 'main'
+                echo "Checking out code from GitHub..."
+                git branch: 'main',
+                    url: 'https://github.com/Deepauk14/jenkins_ec2_create.git'
             }
         }
 
-        stage('Terraform Init') {
+        stage('Terraform Steps') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-credsss'
                 ]]) {
-                    sh '''
-                        cd terraform
-                        terraform init
-                    '''
-                }
-            }
-        }
 
-        stage('Terraform Plan') {
-            steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss'
-                ]]) {
-                    sh '''
-                        cd terraform
-                        terraform plan
-                    '''
-                }
-            }
-        }
+                    script {
+                        echo "Checking if Terraform is installed..."
 
-        stage('Terraform Apply') {
-            steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credsss'
-                ]]) {
-                    sh '''
-                        cd terraform
-                        terraform apply -auto-approve
-                    '''
+                        def terraformCheck = bat(
+                            script: 'terraform -version',
+                            returnStatus: true
+                        )
+
+                        if (terraformCheck != 0) {
+                            error "Terraform is not installed or not in PATH!"
+                        }
+
+                        echo "Terraform is installed. Running Init, Plan, Apply..."
+
+                        dir('terraform') {
+                            bat 'terraform init'
+                            bat 'terraform plan'
+                            bat 'terraform apply -auto-approve'
+                        }
+
+                        echo "Terraform execution completed successfully."
+                    }
                 }
             }
         }
     }
-}
