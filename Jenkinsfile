@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo "Checking out code from GitHub..."
                 git branch: 'main',
-                    url: 'https://github.com/Deepauk14/jenkins_ec2_create.git'
+                    url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git'
             }
         }
 
