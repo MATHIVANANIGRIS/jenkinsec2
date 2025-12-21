@@ -6,12 +6,12 @@ pipeline {
     }
 
     stages {
-
         stage('Checkout Code') {
             steps {
                 echo "Checking out code from GitHub..."
-                git branch: 'main',
-                    url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git'
+                 url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git'
+                  git branch: 'main',
+                   
                 }
             }
         }
