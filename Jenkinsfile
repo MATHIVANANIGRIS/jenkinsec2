@@ -6,13 +6,12 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout Code') {
             steps {
                 echo "Checking out code from GitHub..."
-                 url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git'
-                  git branch: 'main',
-                   
-                }
+                git branch: 'main',
+                    url: 'https://github.com/MATHIVANANIGRIS/jenkinsec2.git'
             }
         }
 
@@ -22,7 +21,6 @@ pipeline {
                     $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-credsss'
                 ]]) {
-
                     script {
                         echo "Checking if Terraform is installed..."
 
@@ -49,3 +47,4 @@ pipeline {
             }
         }
     }
+}
