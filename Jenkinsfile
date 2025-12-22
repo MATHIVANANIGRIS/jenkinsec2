@@ -26,7 +26,7 @@ pipeline {
                         echo "Checking if Terraform is installed..."
 
                         def terraformCheck = bat(
-                            script: 'terraform -version',
+                            script: 'terraform --version',
                             returnStatus: true
                         )
 
